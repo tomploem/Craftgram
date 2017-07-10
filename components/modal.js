@@ -1,10 +1,12 @@
 import React from 'react'
 import Photo from './frame'
+import stylesheet from '../styles/modal.scss'
 
 export default class extends React.Component {
+
   dismiss (e) {
     if (this._shim === e.target ||
-       this._photoWrap === e.target) {
+       this._photoWrap === e.target || this._shimm === e.target) {
       if (this.props.onDismiss) {
         this.props.onDismiss()
       }
@@ -13,29 +15,14 @@ export default class extends React.Component {
 
   render () {
     return (
+        <div ref={el => (this._shimm = el)} className='shimm'>
+            <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
       <div ref={el => (this._shim = el)} className='shim' onClick={(e) => this.dismiss(e)}>
-        <div ref={el => (this._photoWrap = el)} className='photo'>
+        <div ref={el => (this._photoWrap = el)} className='photoframe'>
           <Photo id={this.props.id} />
         </div>
-        <style jsx>{`
-          .shim {
-            position: fixed;
-            background: rgba(0,0,0,.65);
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            margin: auto;
-          }
-
-          .photo {
-            position: absolute;
-            top: 50%;
-            width: 100%;
-            margin-top: -250px;
-          }
-        `}</style>
       </div>
+        </div>
     )
   }
 }

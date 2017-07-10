@@ -1,17 +1,28 @@
 import React from 'react'
 import Router from 'next/router'
+import 'isomorphic-fetch'
 
 import Modal from '../components/modal'
+import Layout from '../components/layout'
+import stylesheet from '../styles/index.scss'
+import photos from '../data/photos.json'
 
-export default class extends React.Component {
-  static getInitialProps () {
+// https://github.com/zeit/nextgram/blob/master
+
+
+class IndexPage extends React.Component {
+  static async getInitialProps () {
+
+      //const res = await fetch('https://api.github.com/repos/zeit/next.js')
+      //const json = await res.json()
     return {
-      photos: new Array(15).fill(0).map((v, k) => k + 1)
+        photos: photos
     }
   }
 
   constructor (props) {
     super(props)
+      console.log(props)
     this.onKeyDown = this.onKeyDown.bind(this)
   }
 
@@ -41,9 +52,11 @@ export default class extends React.Component {
   }
 
   render () {
-    const { url, photos } = this.props
 
+    const { url, photos } = this.props
     return (
+        <Layout>
+          <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
       <div className='list'>
         {
           url.query.photoId &&
@@ -53,46 +66,23 @@ export default class extends React.Component {
             />
         }
         {
-          photos.map((id) => (
-            <div key={id} className='photo'>
+          photos.map((photo) => (
+            <div key={photo.id} className='photo'>
               <a
                 className='photoLink'
-                href={`/photo?id=${id}`}
-                onClick={(e) => this.showPhoto(e, id)}
+                href={`/photo?id=${photo.id}`}
+                onClick={(e) => this.showPhoto(e, photo.id)}
               >
-                {id}
+                <img src={photo.url} />
               </a>
             </div>
           ))
         }
-        <style jsx>{`
-          .list {
-            padding: 50px;
-            text-align: center;
-          }
 
-          .photo {
-            display: inline-block;
-          }
-
-          .photoLink {
-            color: #333;
-            verticalAlign: middle;
-            cursor: pointer;
-            background: #eee;
-            display: inline-block;
-            width: 250px;
-            height: 250px;
-            line-height: 250px;
-            margin: 10px;
-            border: 2px solid transparent;
-          }
-
-          .photoLink:hover {
-            borderColor: blue;
-          }
-        `}</style>
       </div>
+        </Layout>
     )
   }
 }
+
+export default IndexPage

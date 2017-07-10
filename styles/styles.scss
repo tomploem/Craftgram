@@ -1,0 +1,67 @@
+@import 'normalize.css';
+
+$primary-color: #0f0;
+
+body{
+  background-color: #fafafa;
+}
+
+nav{
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background: #FF8008; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #FF8008 , #FFC837); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #FF8008 , #FFC837); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  height: 77px;
+  display: flex;
+  justify-content: space-between;
+  width: calc(100% - 200px);
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+nav img{
+  width: 150px;
+  float: left;
+}
+
+nav .navigationWrap{
+  float: right;
+  width: 100px;
+  height: 20px;
+}
+
+nav .searchWrap{
+}
+
+nav .searchWrap input{
+  margin: auto;
+  width: 80px;
+  float: right;
+  border: solid 1px #dbdbdb;
+  border-radius: 3px;
+  color: #262626;
+  font-size: 13px;
+  outline: none;
+  padding: 3px 100px 3px 26px;
+  height: 25px;
+}
+
+
+p {
+  font-size: xx-large;
+  color: $primary-color;
+  font-family: Roboto, sans-serif;
+}
+
+.permalink {
+  padding: 100px;
+  text-align: center;
+}
+
+.wrap {
+  display: inline-block;
+  border: 20px solid #f00;
+  margin: auto;
+}
